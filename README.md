@@ -14,8 +14,8 @@ cd tp_gestion_conges_status
 
 ### Créer un fichier .env en suivant le modèle .env.example
 2 fichiers à copier : 
-- `tp_gestion_conges_status/.env`
-- `tp_gestion_conges_status/public/.env`
+- `tp_gestion_conges_status/.env.local`
+- `tp_gestion_conges_status/public/.env.local`
 
 ### Construire les conteneurs Docker et démarrer le projet
 ```sh
@@ -53,6 +53,11 @@ docker exec -it php-symfony-gestion_conges_stats bash
 - Arrêter les conteneurs :
 ```sh
 docker compose down
+```
+
+- Ajouter un jeu de données :
+```sh
+symfony console doctrine:fixtures:load
 ```
 
 ## Autres informations
