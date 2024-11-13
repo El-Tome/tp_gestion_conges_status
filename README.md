@@ -1,68 +1,64 @@
-# Symfony Docker Project
+# Projet Symfony Docker
+Ce projet est une application Symfony fonctionnant dans un environnement Docker. Il inclut des services pour Nginx, PHP, MariaDB, et phpMyAdmin.
 
-This project is a Symfony application running in a Docker environment. It includes services for Nginx, PHP, MariaDB, and phpMyAdmin.
-
-## Prerequisites
-
+## Prérequis
 - Docker
 - Docker Compose
 
-## Getting Started
-
-### Clone the Repository
-
+## Démarrage
+### Cloner le dépôt et entrer dans le répertoire du projet
 ```sh
-git clone https://github.com/El-Tome/container-symfony.git
-cd container-symfony
+git clone https://github.com/El-Tome/tp_gestion_conges_status
+cd tp_gestion_conges_status
 ```
 
-### Create a `.env` File
+### Créer un fichier .env en suivant le modèle .env.example
+2 fichiers à copier : 
+- `tp_gestion_conges_status/.env`
+- `tp_gestion_conges_status/public/.env`
 
-Copy the `.env.example` file to `.env`.
-
-### Build the Docker Containers and start project
-
+### Construire les conteneurs Docker et démarrer le projet
 ```sh
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
-Enter in php container
+### Entrer dans le conteneur PHP
+
 ```sh
-docker exec -it php-symfony bash
+docker exec -it php-symfony-gestion_conges_stats bash
 ```
 
-And run
+Et exécuter
 ```sh
 composer install
+sudo apt install nodejs npm -y
+npm install
 ```
 
-## Accessing the Application
-- phpMyAdmin: [http://localhost:8080](http://localhost:8080)
-- Symfony App: [http://localhost:80](http://localhost:80)
+## Accéder à l'application
+phpMyAdmin : http://localhost:8080
+Application Symfony : http://localhost:80
 
-##  Project Structure
+## Structure du projet
+- public/ : Contient l'application Symfony.
+- nginx.conf : Fichier de configuration de Nginx.
+- compose.yaml : Fichier de configuration Docker Compose.
 
-- public/: Contains the Symfony application.
-- nginx.conf: Nginx configuration file.
-- compose.yaml: Docker Compose configuration file.
-
-## Useful Commands
-
-Enter in container:
+## Commandes utiles
+- Entrer dans le conteneur :
 ```sh
-docker exec -it php-symfony bash
+docker exec -it php-symfony-gestion_conges_stats bash
 ```
 
-Stop the containers:
-```sh  
+- Arrêter les conteneurs :
+```sh
 docker compose down
 ```
 
-## Other information
-- symfony version: 7.1.5
-- php version: 8.2
-- mariadb version: 11.5
+## Autres informations
+version de Symfony : 7.1.5
+version de PHP : 8.2
+version de MariaDB : 11.5
 
-## Author
+## Auteur
 [Tom Chaumette](https://github.com/El-Tome)
-
