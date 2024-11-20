@@ -31,5 +31,16 @@ class UserController extends AbstractController
            'users' => $users,
         ]);
     }
+
+    #[Route('/user/conge/{email}', name: 'user_show_conge')]
+    public function showConge($email): Response
+    {
+        $userConges = $this->userRepository->findCongeByEmail($email);
+
+        // Passer les congés à la vue
+        return $this->render('user/conge_user.html.twig', [
+            'userConges' => $userConges,
+        ]);
+    }
 }
 

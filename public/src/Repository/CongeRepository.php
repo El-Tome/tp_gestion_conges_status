@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Conge;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -21,28 +22,18 @@ class CongeRepository extends ServiceEntityRepository
         parent::__construct($registry, Conge::class);
     }
 
-//    /**
-//     * @return Conge[] Returns an array of Conge objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return array
+     * @throws Exception
+     */
+    public function findCate(): array
+    {
+        $connection = $this->getEntityManager()->getConnection();
+        $sql = 'SELECT c.type, COUNT(c.id) as count 
+                FROM conge c 
+                GROUP BY c.type
+                ORDER BY type ASC';
 
-//    public function findOneBySomeField($value): ?Conge
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        return $connection->prepare($sql)->executeQuery()->fetchAllAssociative();
+    }
 }

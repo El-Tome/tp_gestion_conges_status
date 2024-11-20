@@ -21,6 +21,18 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+    public function findCongeByEmail($email)
+    {
+        $connection = $this->getEntityManager()->getConnection();
+        $sql = 'SELECT *  
+                FROM user u 
+                LEFT JOIN conge c ON u.id = c.user_id
+                WHERE u.email = :email';
+
+
+        return $connection->prepare($sql)->executeQuery(['email' => $email])->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

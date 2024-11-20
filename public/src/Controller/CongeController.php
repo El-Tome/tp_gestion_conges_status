@@ -28,5 +28,28 @@ class CongeController extends AbstractController
             'userConges' => $userConges,
         ]);
     }
-   
+
+    #[Route('/conge/cate', name: 'conge_cate')]
+    public function congeCate(): Response
+    {
+        $congeCateType = $this->congeRepository->findCate();
+
+        // Passer les congés à la vue
+        return $this->render('conge/show_cate.html.twig', [
+            'congesTypes' => $congeCateType,
+        ]);
+    }
+
+    #[Route('/conge/cate/{type}', name: 'conge_show_cate_type')]
+    public function congeCateByType($type): Response
+    {
+        $userConges = $this->congeRepository->findBy([
+            'type' => $type
+        ]);
+
+        // Passer les congés à la vue
+        return $this->render('conge/show_cate_type.html.twig', [
+            'userConges' => $userConges,
+        ]);
+    }
 }
