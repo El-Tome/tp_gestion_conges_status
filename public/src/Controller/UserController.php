@@ -22,13 +22,12 @@ class UserController extends AbstractController
     #[Route('/user', name: 'user')]
     public function List(): Response
     {
-       // Utiliser la méthode findAll() pour récupérer tous les utilisateurs
+        // Utiliser la méthode findAll() pour récupérer tous les utilisateurs
         $users = $this->userRepository->findAll();
-       
-// Passer les utilisateurs à la vue
+
+        // Passer les utilisateurs à la vue
         return $this->render('user/index.html.twig', [
-          //  'controller_name' => 'UserController',
-           'users' => $users,
+            'users' => $users,
         ]);
     }
 
